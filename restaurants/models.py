@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.db.models.signals import pre_save, post_save
 
 from .utils import unique_slug_generator
@@ -23,6 +24,8 @@ class RestaurantLocations(models.Model):
 	def __str__(self):
 		return '{} {}'.format(self.name, self.location)
 
+	def get_absolute_url(self):
+		return reverse('restaurants:detail', kwargs= {'slug': self.slug})
 	@property	
 	def title(self):
 		return self.name 
