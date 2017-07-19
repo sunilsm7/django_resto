@@ -51,6 +51,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'django_resto.urls'
+LOGIN_URL = '/login/'
 
 TEMPLATES = [
     {
