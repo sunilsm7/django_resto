@@ -1,9 +1,11 @@
 .rest-list{
-	background-color: rgba(32, 79, 74, 0.37);
+	background-color: rgb(255, 255, 255);
 	margin: 10px;
+	border: 1px solid grey;
 }
 
 .item-list{
-	background-color: rgba(32, 79, 74, 0.37);
+	background-color: rgb(255, 255, 255);
 	margin: 10px;
+
 }
