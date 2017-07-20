@@ -7,7 +7,7 @@ from .models import Item
 # Create your views here.
 
 class ItemListView(ListView):
-	template_class = 'menus/item_list.html'
+	template_name = 'menus/item_list.html'
 	def get_queryset(self):
 		return Item.objects.filter(user = self.request.user)
 
@@ -40,7 +40,7 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
 
 class ItemUpdateView(LoginRequiredMixin, UpdateView):
 	form_class = ItemForm
-	template_name = 'form.html'
+	template_name = 'menus/detail-update.html'
 
 	def get_queryset(self):
 		return Item.objects.filter(user = self.request.user)

@@ -3,7 +3,7 @@
 {% block title%} <title>Menu Items </title> {% endblock %}
 {% block content%}
 
-	<h1> Items List</h1>
+	<h1> Menu Items <small><a href="{% url 'menus:create' %}">Add</small></h1>
 	<ul>
 		{% for obj in object_list %}
 			<li><a href="{{obj.get_absolute_url}}">{{ obj.name }}</a> 
@@ -28,6 +28,8 @@
 					</ul>
 				{% endif %}
 			</li>
+		{% empty %}
+			<li><small><a href="{% url 'menus:create' %}">Add Menu Items</small></li>
 		{% endfor %}
 	</ul>
 {% endblock%}

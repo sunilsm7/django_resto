@@ -3,10 +3,12 @@
 {% block title%} <title>Restaurants List </title> {% endblock %}
 {% block content%}
 
-	<h1> Restaurant List</h1>
+	<h1>My Restaurants <small><a href="{% url 'restaurants:create' %}">Add</a></small></h1>
 	<ul>
 		{% for obj in object_list %}
 			<li><a href="{{ obj.get_absolute_url}}">{{ obj.name }}</a> {{ obj.location }} {{ obj.category }} {{ obj.updated }}</li>
+		{% empty%}
+			<li><a href="{% url 'restaurants:create' %}">Add Restaurant</a></li>
 		{% endfor %}
 	</ul>
 {% endblock%}
