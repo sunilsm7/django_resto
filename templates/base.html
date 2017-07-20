@@ -4,7 +4,10 @@
 
 <head>
     {% block title %}<title>Home Page</title>{% endblock %}
-    {% include 'snippets/css.html'%}
+    {% block stylesheets %}
+        {% include 'snippets/css.html'%}
+
+    {% endblock %}
 </head>
 
 <body>
@@ -17,7 +20,9 @@
         Hello there
         {% endblock%}
     </div>
-  {% include 'snippets/js.html'%}
+    {% block javascript %}
+        {% include 'snippets/js.html'%}
+    {% endblock %}
 </body>
 
 </html>

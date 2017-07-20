@@ -2,11 +2,13 @@
 
 {% block title%} <title>Menu Items </title> {% endblock %}
 {% block content%}
-
+	
+	<div class="row">
+	<div class="container">
 	<h1> Menu Items <small><a href="{% url 'menus:create' %}">Add</small></h1>
-	<ul>
+	<div class="list-group col-sm-8">
 		{% for obj in object_list %}
-			<li><a href="{{obj.get_absolute_url}}">{{ obj.name }}</a> 
+			<div class="list-group-item item-list"><a href="{{obj.get_absolute_url}}">{{ obj.name }}</a> 
 			</br>
 				{% if obj.contents %}
 					Contents
@@ -27,11 +29,13 @@
 
 					</ul>
 				{% endif %}
-			</li>
+			</div>
 		{% empty %}
 			<li><small><a href="{% url 'menus:create' %}">Add Menu Items</small></li>
 		{% endfor %}
-	</ul>
+	</div>
 
 	{% include 'snippets/pagination.html' %}
+	</div>
+	</div>
 {% endblock%}

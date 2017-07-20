@@ -1,3 +1,9 @@
 .rest-list{
-	background-color: #ccc;
+	background-color: rgba(32, 79, 74, 0.37);
+	margin: 10px;
+}
+
+.item-list{
+	background-color: rgba(32, 79, 74, 0.37);
+	margin: 10px;
 }
