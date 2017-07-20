@@ -32,4 +32,6 @@
 			<li><small><a href="{% url 'menus:create' %}">Add Menu Items</small></li>
 		{% endfor %}
 	</ul>
+
+	{% include 'snippets/pagination.html' %}
 {% endblock%}

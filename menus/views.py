@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, UpdateView, CreateView
+from django.core.paginator import Paginator
 
 from .forms import ItemForm
 from .models import Item
@@ -8,6 +9,8 @@ from .models import Item
 
 class ItemListView(ListView):
 	template_name = 'menus/item_list.html'
+	paginate_by = 10
+
 	def get_queryset(self):
 		return Item.objects.filter(user = self.request.user)
 

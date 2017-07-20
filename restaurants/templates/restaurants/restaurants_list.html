@@ -3,12 +3,24 @@
 {% block title%} <title>Restaurants List </title> {% endblock %}
 {% block content%}
 
-	<h1>My Restaurants <small><a href="{% url 'restaurants:create' %}">Add</a></small></h1>
-	<ul>
+	<div class="row">
+	<h2>My Restaurants <small><a href="{% url 'restaurants:create' %}">Add</a></small></h2>
+	<div class="list-group col-sm-8">
 		{% for obj in object_list %}
-			<li><a href="{{ obj.get_absolute_url}}">{{ obj.name }}</a> {{ obj.location }} {{ obj.category }} {{ obj.updated }}</li>
-		{% empty%}
-			<li><a href="{% url 'restaurants:create' %}">Add Restaurant</a></li>
+			<span class="list-group-item list-group-item-action flex-column align-items-start rest-list">
+			    <div class="d-flex w-100 justify-content-between">
+			      <h3 class="mb-1"><a href="{{ obj.get_absolute_url}}" >{{ obj.name }}</a>  <small>{{ obj.location }}</small></h3>
+			     
+			    </div>
+			    <p class="mb-1">Category:{{ obj.category }}</p>
+			    <small>Last Updated: {{ obj.updated }}</small>
+ 			 </span>
+			{% empty%}
+			
+				<h5 class="mb-1"><a href="{% url 'restaurants:create' %}">Add Restaurant</a></h5>
+			
 		{% endfor %}
-	</ul>
+		{% include 'snippets/pagination.html' %}
+	</div>
+	</div>
 {% endblock%}

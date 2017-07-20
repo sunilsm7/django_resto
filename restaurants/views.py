@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 from django.db.models import Q 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import View
@@ -13,6 +14,7 @@ from .models import RestaurantLocations
 
 class RestaurantListView(LoginRequiredMixin, ListView):
     template_name = 'restaurants/restaurants_list.html'
+    paginate_by = 10
 
     def get_queryset(self):
         return RestaurantLocations.objects.filter(owner = self.request.user)
