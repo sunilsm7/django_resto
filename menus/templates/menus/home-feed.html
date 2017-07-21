@@ -1,0 +1,30 @@
+{% extends "base.html"%}
+{% block content %}
+
+<div class="row">
+<div class="col-sm-8"> 
+	<h2>User Following Feed</h2>
+{% for obj in object_list %}
+		
+
+		<div class="thumbnail">
+
+			<h3><strong><a href="{% url 'profiles:detail' username=obj.user.username%}">{{ obj.user }}</a></strong> </h3>
+			<h4><strong>{{ obj.name }}</strong> </h4>
+			<p><a href="{% url 'profiles:detail' username=obj.user.username%}?q={{obj.restaurant.title}}">{{ obj.restaurant.title }}</a>| <a href="{% url 'profiles:detail' username=obj.user.username%}?q={{obj.restaurant.location}}">{{ obj.restaurant.location}}</a> |<a href="{% url 'profiles:detail' username=obj.user.username%}?q={{obj.restaurant.category}}"> {{ obj.restaurant.category}}</a></p>
+			<p>
+				<strong>{{ obj.name }}:</strong> with 
+				{% for ing in obj.get_contents %}
+					<a href="{% url 'profiles:detail' username=obj.user.username%}?q={{ing}}">
+						{{ ing}}
+					</a>
+				{% endfor %}
+					
+			</p>
+		</div>
+
+{% endfor %}
+{% include 'snippets/pagination.html' %}
+</div>
+</div>
+{% endblock %}

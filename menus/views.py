@@ -1,20 +1,35 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, UpdateView, CreateView
+from django.views.generic import View, ListView, DetailView, UpdateView, CreateView
 from django.core.paginator import Paginator
 
 from .forms import ItemForm
 from .models import Item
+
 # Create your views here.
 
-class ItemListView(ListView):
+class HomeView(View):
+	#template_name='home-feed.html'
+	paginate_by = 10
+	def get(self, request, *args, **kwargs):
+		if not request.user.is_authenticated():
+			return render(request, 'menus/home-feed.html', {})
+		user = request.user
+		is_following_user_id = [x.user.id for x in user.is_following.all()]
+		qs = Item.objects.filter(user__id__in=is_following_user_id, public=True).order_by("-updated")
+
+		return render(request, 'menus/home-feed.html', {'object_list':qs})
+	
+
+
+class ItemListView(LoginRequiredMixin,ListView):
 	template_name = 'menus/item_list.html'
 	paginate_by = 10
 
 	def get_queryset(self):
 		return Item.objects.filter(user = self.request.user)
 
-class ItemDetailView(DetailView):
+class ItemDetailView(LoginRequiredMixin, DetailView):
 	def get_queryset(self):
 		return Item.objects.filter(user = self.request.user)
 
