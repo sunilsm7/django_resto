@@ -2,7 +2,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user_model
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import DetailView, View
+from django.views.generic import CreateView, DetailView, View
+
+from .forms import RegisterForm
 
 from menus.models import Item
 from restaurants.models import RestaurantLocations	
@@ -11,6 +13,16 @@ from .models import Profile
 # Create your views here.
  
 User =get_user_model()
+
+class RegisterView(CreateView):
+	form_class = RegisterForm
+	template_name ='registration/register.html'
+	success_url = '/'
+
+	def dispatch(self, *args, **kwargs):
+		# if self.request.user.is_authenticated():
+		# 	return redirect('/login')
+		return super(RegisterView, self).dispatch(*args,**kwargs)
 
 class ProfileFollowToggle(LoginRequiredMixin, View):
 	def post(sel, request, *args, **kwargs):
