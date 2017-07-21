@@ -2,8 +2,8 @@
 
 {% block title%} <title>{{user.username}} </title> {% endblock %}
 {% block content%}
-
 	<h1>{{ user.username }}</h1>
+	<p>{% include 'profiles/snippet/follow_form.html' with username=user.username is_following=is_following %} </p>
 	<form class="form" method="GET" action=".">
 		<div class="form-group col-sm-2">
 			<input type="text" name="q" placeholder="Search.." value="{{ request.GET.q }}" class="form-control">
