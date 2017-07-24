@@ -10,14 +10,11 @@
     {% endblock %}
 </head>
 
-<body>
-    
-    <div class="nav">
+<body> 
         {% include 'snippets/nav.html' %}
-    </div>
     <div class="container">
         {% block content%}
-        Hello there
+        
         {% endblock%}
     </div>
     {% block javascript %}

@@ -13,7 +13,7 @@ class HomeView(View):
 	paginate_by = 10
 	def get(self, request, *args, **kwargs):
 		if not request.user.is_authenticated():
-			return render(request, 'menus/home-feed.html', {})
+			return render(request, 'home.html', {})
 		user = request.user
 		is_following_user_id = [x.user.id for x in user.is_following.all()]
 		qs = Item.objects.filter(user__id__in=is_following_user_id, public=True).order_by("-updated")
