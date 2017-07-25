@@ -2,9 +2,16 @@
 
 {% block title%} <title>{{ title }} </title> {% endblock %}
 {% block content%}
-
+<div class="container">
 	<h2>{{ title }}</h2>
-	<div class="container">
-	{% include 'snippets/form-snippet.html' %}
 	
+	<div class="row">
+		<form method="post">{% csrf_token %}
+			{% include 'snippets/form-snippet.html' %}
+			<div class="form-group">
+				<button type="submit" class="btn btn-success">Save</button>
+			</div>
+		</form>
+	</div>
+</div>
 {% endblock%}

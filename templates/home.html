@@ -2,5 +2,26 @@
 
 {% block content %}
 
+<form class="form" method="GET" action="."> {% csrf_token %}
+	<div class="form-group col-sm-4">
+		<input type="text" name="q" placeholder="Search... Restaurants, dishes, location etcs" value="{{ request.GET.q }}" class="form-control">
+	</div>
+	<button class="btn btn-success" type="submit">Search</button>
+</form>
 
+{% if locations %}
+	{% for rest in locations %}
+		<div class="row">
+			<div class="col-sm-8"> 
+				<div class="thumbnail">
+					<h4><strong>{{ rest.title }}</strong> </h4>
+					<p><a href="{{ request.path}}?q={{ rest.location}}">{{ rest.location}}</a> | <a href="{{request.path}}?q={{ rest.category}}">{{ rest.category}}</a></p>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+	{% include 'snippets/pagination.html' %}
+{% else %}
+		
+{% endif %}
 {% endblock%}

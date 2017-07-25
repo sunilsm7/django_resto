@@ -5,15 +5,23 @@ from django.core.paginator import Paginator
 
 from .forms import ItemForm
 from .models import Item
-
+from restaurants.models import RestaurantLocations
 # Create your views here.
 
 class HomeView(View):
 	#template_name='home-feed.html'
 	paginate_by = 10
 	def get(self, request, *args, **kwargs):
+		context = {}
 		if not request.user.is_authenticated():
-			return render(request, 'home.html', {})
+			query = self.request.GET.get('q')
+			if not query:
+				qs = RestaurantLocations.objects.search(query)
+				if qs.exists():
+					context['locations'] = qs
+				return render(request, 'home.html', context)
+			else:
+				return render(request, 'home.html',{})
 		user = request.user
 		is_following_user_id = [x.user.id for x in user.is_following.all()]
 		qs = Item.objects.filter(user__id__in=is_following_user_id, public=True).order_by("-updated")

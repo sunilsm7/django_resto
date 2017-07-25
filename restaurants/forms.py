@@ -4,6 +4,7 @@ from .validators import validate_category
 
 class RestaurantCreateForm(forms.Form):
 	name 		= forms.CharField()
+	city		= forms.CharField(required=False)
 	location 	= forms.CharField(required=False)
 	category 	= forms.CharField(required=False)
 
@@ -20,6 +21,7 @@ class RestaurantLocationCreateForm(forms.ModelForm):
 		model = RestaurantLocations
 		fields = [
 			'name',
+			'city',
 			'location',
 			'category',
 			'slug',

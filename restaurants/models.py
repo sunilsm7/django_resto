@@ -14,6 +14,7 @@ class RestaurantLocationsQuerySet(models.query.QuerySet):
 			query = query.strip()
 			return self.filter(
 				Q(name__icontains=query)|
+				Q(city__city_name__iexact=query)|
 				Q(location__icontains=query)|
 				Q(location__iexact=query)|
 				Q(category__icontains=query)|

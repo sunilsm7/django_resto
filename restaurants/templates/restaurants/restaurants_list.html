@@ -4,7 +4,7 @@
 {% block content%}
 
 	<div class="row">
-	<h2>My Restaurants <small><a href="{% url 'restaurants:create' %}">Add</a></small></h2>
+	<h1>My Restaurants <small><a href="{% url 'restaurants:create' %}">Add</a></small></h1>
 	<div class="list-group col-sm-8">
 		{% for obj in object_list %}
 			<span class="list-group-item list-group-item-action flex-column align-items-start rest-list">

@@ -1,4 +1,5 @@
 {% load static %}
+{% load staticfiles %}  
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,16 +11,20 @@
     {% endblock %}
 </head>
 
-<body> 
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60"> 
         {% include 'snippets/nav.html' %}
-    <div class="container">
+<div id="about" class="container-fluid">
+  
         {% block content%}
         
         {% endblock%}
-    </div>
+
+</div>
     {% block javascript %}
         {% include 'snippets/js.html'%}
     {% endblock %}
+
+
 </body>
 
 </html>
