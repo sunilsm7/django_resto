@@ -34,5 +34,5 @@ urlpatterns = [
     url(r'^restaurants/', include('restaurants.urls', namespace='restaurants')),
     url(r'^contact/$', TemplateView.as_view(template_name='contact.html'), name='contact'),
     url(r'^about/$', TemplateView.as_view(template_name='about.html'), name='about'),
-    #url(r'^$', RedirectView.as_view(url='/', permanent=True)),
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 
+

@@ -31,9 +31,31 @@ class RestaurantLocationsManager(models.Manager):
 	def search(self, query): # RestaurantLocations.objects.search()
 		return self.get_queryset().search(query)
 
+class State(models.Model):
+	state_name = models.CharField(max_length=200)
+
+	class Meta:
+		verbose_name_plural = "Restaurant States"
+
+	def __str__(self):
+		return '{}'.format(self.state_name)
+
+
+class City(models.Model):
+	city_name 	= models.CharField(max_length=200)
+	state 		= models.ForeignKey(State)
+
+	class Meta:
+		verbose_name_plural = "Restaurant City"
+
+	def __str__(self):
+		return '{} {}'.format(self.city_name, self.state)
+
+
 class RestaurantLocations(models.Model):
 	owner 		= models.ForeignKey(User) # class_instance.model_set.all()
 	name 		= models.CharField(max_length=128)
+	city 		= models.ForeignKey(City)
 	location 	= models.CharField(max_length=128, null=True, blank=True)
 	category 	= models.CharField(max_length=128, null=True, blank=True, validators=[validate_category])
 	timestamp 	= models.DateTimeField(auto_now_add=True)
