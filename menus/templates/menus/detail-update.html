@@ -25,6 +25,15 @@
 
 					</ul>
 				{% endif %}
+	
+	<div class="row">
 	<h3>Make Changes </h3>
-	{% include 'snippets/form-snippet.html' with form=form%}
+		<form method="post" >{% csrf_token %}
+			{% include 'snippets/form-snippet.html' %}{% include 'snippets/form-snippet.html' with form=form%}
+			<div class="form-group">
+				<button type="submit" class="btn btn-success">Save</button>
+			</div>
+		</form>
+	</div>
+	
 {% endblock%}
