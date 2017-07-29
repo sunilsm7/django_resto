@@ -25,7 +25,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY','9a4p8c^)wz!_45qop7m-o%c-febos&3q$-)nkg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://foodies-spot.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['https://foodies-spot.herokuapp.com','localhost','127.0.0.1']
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'youremail@gmail.com' 
