@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 SECRET_KEY = os.environ.get('SECRET_KEY','9a4p8c^)wz!_45qop7m-o%c-febos&3q$-)nkgyu(wte6_kl7^')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['foodies-spot.herokuapp.com','localhost','127.0.0.1']
 
