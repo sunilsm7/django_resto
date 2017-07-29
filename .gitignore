@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 django_resto/settings/local.py
+django_resto/settings/local2.py
 */local.py
 db.sqlite3
 *.sqlite3
