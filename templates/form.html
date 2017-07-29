@@ -6,8 +6,8 @@
 	<h2>{{ title }}</h2>
 	
 	<div class="row">
-		<form method="post">{% csrf_token %}
-			{% include 'snippets/form-snippet.html' %}
+		<form method="post" >{% csrf_token %}
+			{{% include 'snippets/form-snippet.html' %}}
 			<div class="form-group">
 				<button type="submit" class="btn btn-success">Save</button>
 			</div>
