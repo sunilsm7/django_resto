@@ -1,9 +1,29 @@
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
-
+from django.db.models import Q
 from restaurants.models import RestaurantLocations
 # Create your models here.
+
+class ItemQuerySet(models.query.QuerySet):
+	def search(self, query): # RestaurantLocations.objects.all().search(query) or  RestaurantLocations.objects.all().filter(something).search(query)
+		if query:
+			query = query.strip()
+			return self.filter(
+				Q(name__icontains=query)|
+				Q(item_category__category__istartswith=query)
+				#Q(restaurant_id__name__icontains=query)
+				# Q(course__icontains=query)|
+				# Q(contents__icontains=query)
+				).distinct()
+		return self
+
+class ItemManager(models.Manager):
+	def get_queryset(self):
+		return ItemQuerySet(self.model, using=self._db)
+
+	def search(self, query): # RestaurantLocations.objects.search()
+		return self.get_queryset().search(query)
 
 class ItemCategory(models.Model):
 	category = models.CharField(max_length = 128) 
@@ -35,6 +55,8 @@ class Item(models.Model):
 	public			= models.BooleanField(default = True)
 	timestamp 		= models.DateTimeField(auto_now_add=True)
 	updated 		= models.DateTimeField(auto_now=True) 
+
+	objects = ItemManager()
 
 	def __str__(self) :
 		return '{} {}'.format(self.name, self.restaurant)

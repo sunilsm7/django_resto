@@ -1,7 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
+from django.db.models import Q 
 from django.shortcuts import render
 from django.views.generic import View, ListView, DetailView, UpdateView, CreateView
-from django.core.paginator import Paginator
+
 
 from .forms import ItemForm
 from .models import Item
@@ -41,12 +43,14 @@ class HomeView(View):
 	# 			return render(request, 'home.html',{})
     		
 
-class ItemListView(LoginRequiredMixin,ListView):
-	template_name = 'menus/item_list.html'
+class ItemListView(ListView):
+	template_name = 'menus/item_list_all.html'
 	paginate_by = 10
 
 	def get_queryset(self):
-		return Item.objects.filter(user = self.request.user)
+		query = self.request.GET.get('q')
+		querset = Item.objects.filter(public=True).search(query)
+		return querset
 
 class MyItemListView(LoginRequiredMixin,ListView):
 	template_name = 'menus/item_list.html'
@@ -55,9 +59,9 @@ class MyItemListView(LoginRequiredMixin,ListView):
 	def get_queryset(self):
 		return Item.objects.filter(user = self.request.user)
 
-class ItemDetailView(LoginRequiredMixin, DetailView):
+class ItemDetailView(DetailView):
 	def get_queryset(self):
-		return Item.objects.filter(user = self.request.user)
+		return Item.objects.filter(public=True)
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
 	form_class = ItemForm
