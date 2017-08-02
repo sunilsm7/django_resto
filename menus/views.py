@@ -76,7 +76,7 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
 		return context
 
 	def form_valid(self,form):
-		obj = form.save(commit = False,initial={'item_category':'All','course':'All'})
+		obj = form.save(commit = False)
 		obj.user = self.request.user
 		return super(ItemCreateView, self).form_valid(form)
 
