@@ -1,24 +1,36 @@
-
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-default navbar-inverse">
   <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="/">Foodies Adda </a>
     </div>
     <ul class="nav navbar-nav">
       	<li><a href = "{% url 'home' %}">Home</a></li>
-		<li><a href = "{% url 'restaurants:list' %}">Restaurants</a>
-		<li><a href = "{% url 'menus:list' %}">Menu Items</a>
-		<li><a href = "{% url 'contact' %}">Contact</a>
-		<li><a href = "{% url 'about' %}">About</a>
+        <li><a href = "{% url 'restaurants:restaurant' %}">Restaurants</a>
+        <li><a href = "{% url 'menus:list' %}">Food Dishes</a>
+    		<li><a href = "{% url 'contact' %}">Contact</a>
+    		<li><a href = "{% url 'about' %}">About</a>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-    	{% if request.user.is_authenticated %}
-		<li><a href = "{% url 'profiles:detail' request.user.username %}">My Profile</a>
-		<li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      {% if request.user.is_authenticated %}
+        
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{request.user.username}}
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href = "{% url 'profiles:detail' request.user.username %}">Profile</a>
+          <hr/>
+          <li><a href = "{% url 'restaurants:list' %}">My Restaurants</a>
+          <li><a href = "{% url 'menus:list' %}">My Menu Items</a>
+          <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
+      </li>
+		
 		{% else %}
       <li><a href="{% url 'register' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       {% endif %}
+      
     </ul>
+
   </div>
 </nav>

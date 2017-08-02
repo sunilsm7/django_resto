@@ -12,25 +12,43 @@ class HomeView(View):
 	#template_name='home-feed.html'
 	paginate_by = 10
 	def get(self, request, *args, **kwargs):
-		context = {}
 		if not request.user.is_authenticated():
+			# object_list = Item.objects.filter(public=True).order_by('-timestamp')
+			# object_list = RestaurantLocations.objects.all()
+			# return render(request, "home.html", {"locations": object_list})
+			context = {}
 			query = self.request.GET.get('q')
-			if not query:
-				qs = RestaurantLocations.objects.search(query)
-				if qs.exists():
-					context['locations'] = qs
+			qs = RestaurantLocations.objects.search(query)	
+			if qs.exists():
+				context['locations'] = qs
 				return render(request, 'home.html', context)
-			else:
-				return render(request, 'home.html',{})
+
 		user = request.user
 		is_following_user_id = [x.user.id for x in user.is_following.all()]
 		qs = Item.objects.filter(user__id__in=is_following_user_id, public=True).order_by("-updated")
-
 		return render(request, 'menus/home-feed.html', {'object_list':qs})
-	
 
+	# def post(self, request, *args, **kwargs):
+	# 	context = {}
+	# 	if not request.user.is_authenticated():	
+	# 		query = self.request.GET.get('q')
+	# 		if not query:
+	# 			qs = RestaurantLocations.objects.search(query)
+	# 			if qs.exists():
+	# 				context['locations'] = qs
+	# 				return render(request, 'home.html', context)
+	# 		else:
+	# 			return render(request, 'home.html',{})
+    		
 
 class ItemListView(LoginRequiredMixin,ListView):
+	template_name = 'menus/item_list.html'
+	paginate_by = 10
+
+	def get_queryset(self):
+		return Item.objects.filter(user = self.request.user)
+
+class MyItemListView(LoginRequiredMixin,ListView):
 	template_name = 'menus/item_list.html'
 	paginate_by = 10
 
@@ -54,7 +72,7 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
 		return context
 
 	def form_valid(self,form):
-		obj = form.save(commit = False)
+		obj = form.save(commit = False,initial={'item_category':'All','course':'All'})
 		obj.user = self.request.user
 		return super(ItemCreateView, self).form_valid(form)
 

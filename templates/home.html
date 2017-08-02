@@ -3,13 +3,7 @@
  
 {% block content %}
 
-<form class="form" method="GET" action="."> {% csrf_token %}
-	<div class="form-group col-sm-4">
-		<input type="text" name="q" placeholder="Search... Restaurants, dishes, location etcs" value="{{ request.GET.q }}" class="form-control">
-	</div>
-	<button class="btn btn-success" type="submit">Search</button>
-</form>
-
+<div class="container">
 {% if locations %}
 	{% for rest in locations %}
 		<div class="row">
@@ -25,4 +19,5 @@
 {% else %}
 		
 {% endif %}
+</div>
 {% endblock%}

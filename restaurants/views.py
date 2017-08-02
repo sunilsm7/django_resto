@@ -11,20 +11,44 @@ from .forms import RestaurantCreateForm, RestaurantLocationCreateForm
 from .models import RestaurantLocations
 
 # Create your views here.
+class RestaurantListView(ListView):
+    template_name = 'restaurants/restaurants_list_all.html'
+    paginate_by = 10
 
-class RestaurantListView(LoginRequiredMixin, ListView):
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        queryset = RestaurantLocations.objects.search(query) 
+        return queryset
+
+    # def get(self, request, *args, **kwargs):
+    #     context = {}
+    #     query = self.request.GET.get('q')
+    #     qs = RestaurantLocations.objects.search(query)  
+    #     if qs.exists():
+    #         context['object_list'] = qs
+    #         return render(request, 'restaurants/restaurants_list_all.html', context)
+    #     return render(request, 'restaurants/restaurants_list_all.html', {'object_list':object_list})
+
+class RestaurantDetailView(DetailView):
+    #template_name = 'restaurants/restaurants_list.html'
+    queryset = RestaurantLocations.objects.all()
+
+    # def get_queryset(self):
+    #     return RestaurantLocations.objects.filter(owner = self.request.user)
+
+class MyRestaurantListView(LoginRequiredMixin, ListView):
     template_name = 'restaurants/restaurants_list.html'
     paginate_by = 10
 
     def get_queryset(self):
         return RestaurantLocations.objects.filter(owner = self.request.user)
 
-class RestaurantDetailView(LoginRequiredMixin, DetailView):
-    #template_name = 'restaurants/restaurants_list.html'
-    #queryset = RestaurantLocations.objects.all()
+# class RestaurantDetailView(LoginRequiredMixin, DetailView):
+#     #template_name = 'restaurants/restaurants_list.html'
+#     #queryset = RestaurantLocations.objects.all()
 
-    def get_queryset(self):
-        return RestaurantLocations.objects.filter(owner = self.request.user)
+#     def get_queryset(self):
+#         return RestaurantLocations.objects.filter(owner = self.request.user)
 
 
 class RestaurantCreateView(LoginRequiredMixin, CreateView):

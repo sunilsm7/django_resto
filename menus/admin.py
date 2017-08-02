@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Item
+from .models import Item, ItemCategory
 # Register your models here.
 class ItemAdmin(admin.ModelAdmin):
 	list_display = ['name', 'restaurant']
@@ -8,3 +8,4 @@ class ItemAdmin(admin.ModelAdmin):
 	list_per_page = 20
 	
 admin.site.register(Item, ItemAdmin)
+admin.site.register(ItemCategory)

@@ -17,8 +17,8 @@ class RestaurantLocationsQuerySet(models.query.QuerySet):
 				Q(city__city_name__iexact=query)|
 				Q(location__icontains=query)|
 				Q(location__iexact=query)|
-				Q(category__icontains=query)|
-				Q(category__iexact=query)|
+				Q(category__cuisine__icontains=query)|
+				Q(category__cuisine__iexact=query)|
 				Q(item__name__icontains=query)|
 				Q(item__contents__icontains=query)
 				).distinct()
@@ -36,7 +36,7 @@ class State(models.Model):
 	state_name = models.CharField(max_length=200)
 
 	class Meta:
-		verbose_name_plural = "Restaurant States"
+		verbose_name_plural = "01 Restaurant States"
 
 	def __str__(self):
 		return '{}'.format(self.state_name)
@@ -47,18 +47,25 @@ class City(models.Model):
 	state 		= models.ForeignKey(State)
 
 	class Meta:
-		verbose_name_plural = "Restaurant City"
+		verbose_name_plural = "02 Restaurant City"
 
 	def __str__(self):
 		return '{} {}'.format(self.city_name, self.state)
 
+class RestaurantCuisine(models.Model):
+	cuisine 	= models.CharField(max_length=200)
+	class Meta:
+		verbose_name_plural = "03 Restaurant Cuisine"
+
+	def __str__(self):
+		return '{}'.format(self.cuisine)
 
 class RestaurantLocations(models.Model):
 	owner 		= models.ForeignKey(User) # class_instance.model_set.all()
 	name 		= models.CharField(max_length=128)
 	city 		= models.ForeignKey(City)
 	location 	= models.CharField(max_length=128, null=True, blank=True)
-	category 	= models.CharField(max_length=128, null=True, blank=True, validators=[validate_category])
+	category 	= models.ForeignKey(RestaurantCuisine, null=True, blank=True)
 	timestamp 	= models.DateTimeField(auto_now_add=True)
 	updated 	= models.DateTimeField(auto_now=True)   
 	slug		= models.SlugField(null=True, blank=True)
@@ -67,7 +74,7 @@ class RestaurantLocations(models.Model):
 
 	class Meta:
 		ordering = ['-updated']
-		verbose_name_plural = "Restaurant Location"
+		verbose_name_plural = "04 Restaurant Location"
 
 	def __str__(self):
 		return '{} {}'.format(self.name, self.location)
@@ -82,7 +89,7 @@ class RestaurantLocations(models.Model):
 
 def rl_pre_save_receiver(sender, instance, *args, **kwargs):
 
-	instance.category = instance.category.capitalize()
+	#instance.category = instance.category.capitalize()
 	if not instance.slug:
 		instance.slug = unique_slug_generator(instance)
 

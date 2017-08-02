@@ -2,10 +2,15 @@
 
 {% block title%} <title>Restaurants Detail </title> {% endblock %}
 {% block content%}
-
+<div class="container">
 	<h1> {{ object.name }} <small>{{object.category}}</h1>
 	<p>{{ object.location }}</p>
-	<p>{{ object.timestamp}}, {{ object.updated|timesince}} ago </p>
-
-	
+	<p>{{ object.timestamp}}, {{ object.updated|timesince }} ago </p>
+	<strong>Foods at {{ object.name }}</strong>
+		{% for obj in object.item_set.all %}
+			<li>{{ obj.name }}</li>
+		{% empty %}
+			<small>No food dishes available yet!</small>
+		{% endfor %}
+</div>
 {% endblock%}

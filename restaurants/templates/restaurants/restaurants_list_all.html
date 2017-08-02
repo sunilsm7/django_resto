@@ -1,0 +1,35 @@
+{% extends "base.html"%}
+
+{% block title%} <title>Restaurants List </title> {% endblock %}
+{% block content%}
+
+	<div class="row">
+	<div class="container">
+	<h1>Restaurants</h1>
+		<form class="form-inline" method="GET" action=".">{% csrf_token %}
+		  <div class="form-group">
+		    <label for="restaurants"></label>
+		    <input type="text" class="form-control" name="q" placeholder="Search Restaurants">
+		  </div>
+	
+		  <button type="submit" class="btn btn-success">Search</button>
+		</form>
+	
+	<div class="list-group col-sm-8">
+		{% for obj in object_list %}
+			<span class="list-group-item list-group-item-action flex-column align-items-start rest-list">
+			    <div class="d-flex w-100 justify-content-between">
+			      <h3 class="mb-1"><a href="{% url 'restaurants:details' obj.slug %}" >{{ obj.name }}</a>  <small>{{ obj.location }}</small></h3>
+			     
+			    </div>
+			    <p class="mb-1">Category:{{ obj.category }}</p>
+			    <small>Last Updated: {{ obj.updated }}</small>
+ 			 </span>
+ 			 
+			{% empty%}
+		{% endfor %}
+		{% include 'snippets/pagination.html' %}
+	</div>
+	</div>
+	</div>
+{% endblock%}

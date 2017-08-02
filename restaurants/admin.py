@@ -1,10 +1,11 @@
 from django.contrib import admin
-from .models import RestaurantLocations, State, City
+from .models import RestaurantLocations, State, City,RestaurantCuisine
 # Register your models here.
 
 admin.site.register(State)
 
 admin.site.register(City)
+admin.site.register(RestaurantCuisine)
 
 class RestaurantLocationsAdmin(admin.ModelAdmin):
 	list_display = ['name', 'city','location', 'category','updated']

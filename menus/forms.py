@@ -8,6 +8,8 @@ class ItemForm(forms.ModelForm):
 		fields = [
 			'restaurant',
 			'name',
+			'item_category',
+			'course',
 			'contents',
 			'excludes',
 			'public'
