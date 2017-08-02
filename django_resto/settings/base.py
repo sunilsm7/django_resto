@@ -25,7 +25,7 @@ SECRET_KEY = '9a4p8c^)wz!_45qop7m-o%c-febos&3q$-)nkgyu(wte6_kl7^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1','foodies-spot.herokuapp.com']
 
 
 # EMAIL_HOST = 'smtp.email-host-provider-domain.com'
