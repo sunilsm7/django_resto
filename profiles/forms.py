@@ -42,4 +42,3 @@ class RegisterForm(forms.ModelForm):
             print(user.profile)
             user.profile.send_activation_email()
         return user
-

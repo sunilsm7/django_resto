@@ -4,12 +4,20 @@
 {% block content %}
 
 <div class="container">
+<form class="form-inline" method="GET" action=".">{% csrf_token %}
+		  <div class="form-group">
+		    <label for="menus"></label>
+		    <input type="text" class="form-control" name="q" placeholder="Search Restaurants, food dishes...">
+		  </div>
+	
+		  <button type="submit" class="btn btn-success">Search</button>
+	</form>
 {% if locations %}
 	{% for rest in locations %}
 		<div class="row">
 			<div class="col-sm-8"> 
 				<div class="thumbnail">
-					<h4><strong>{{ rest.title }}</strong> </h4>
+					<h4><strong><a href="{% url 'restaurants:details' rest.slug %}">{{ rest.title }}</a></strong> </h4>
 					<p><a href="{{ request.path}}?q={{ rest.location}}">{{ rest.location}}</a> | <a href="{{request.path}}?q={{ rest.category}}">{{ rest.category}}</a></p>
 				</div>
 			</div>

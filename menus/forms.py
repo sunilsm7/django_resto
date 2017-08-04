@@ -10,6 +10,7 @@ class ItemForm(forms.ModelForm):
 			'name',
 			'item_category',
 			'course',
+			'price',
 			'contents',
 			'excludes',
 			'public'

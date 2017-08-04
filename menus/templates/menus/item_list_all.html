@@ -5,42 +5,29 @@
 	
 	<div class="row">
 	<div class="container">
-	<h1> Menu Items </h1>
+	<h1> Food Items </h1>
 	<form class="form-inline" method="GET" action=".">{% csrf_token %}
 		  <div class="form-group">
 		    <label for="menus"></label>
 		    <input type="text" class="form-control" name="q" placeholder="Search food dishes...">
 		  </div>
-	
 		  <button type="submit" class="btn btn-success">Search</button>
-		</form>
+	</form>
 	<div class="list-group col-sm-8">
 		{% for obj in object_list %}
-			<div class="list-group-item item-list"><h3><a href="{% url 'menus:details' obj.pk %}">
-			{{ obj.name }}</a> <small><a href="{{ request.path}}?q={{ obj.item_category}}">{{obj.item_category}}</a></small></h3>
-			</br>
-			<p>	<li><strong><a href="{% url 'restaurants:details' obj.restaurant.slug %}">{{obj.restaurant}}</a></strong>
-				<li><strong>{{obj.course}}</strong>
-			</p>
-				{% if obj.contents %}
-					Contents
-					<ul>
-						{% for item in obj.get_contents %}
-							<li> {{ item }} </li>
-						{% endfor %}
-
-					</ul>
-				{% endif %}
-				</br>
-				{% if obj.excludes %}
-					Excludes
-					<ul>
-						{% for item in obj.get_excludes %}
-							<li> {{ item }} </li>
-						{% endfor %}
-
-					</ul>
-				{% endif %}
+			<div class="list-group-item item-list">
+				<h3><a href="{% url 'menus:details' obj.pk %}">
+				{{ obj.name }}</a> <small><a href="{{ request.path}}?q={{ obj.item_category}}">{{obj.item_category}}</a></small></h3>
+				<p>	
+					<li>
+						<strong>
+							<a href="{% url 'restaurants:details' obj.restaurant.slug %}">{{obj.restaurant.name}},</a>
+						</strong>
+						<small><a href="{{ request.path}}?q={{ obj.restaurant.location }}">{{obj.restaurant.location}}</a></small>
+					</li>
+					<li><strong>{{obj.course}}</strong></strong></li>
+					<li><strong>Price Rs.{{ obj.price }}</strong></li>
+				</p>
 			</div>
 		{% empty %}
 			

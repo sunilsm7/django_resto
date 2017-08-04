@@ -66,6 +66,8 @@ class RestaurantLocations(models.Model):
 	city 		= models.ForeignKey(City)
 	location 	= models.CharField(max_length=128, null=True, blank=True)
 	category 	= models.ForeignKey(RestaurantCuisine, null=True, blank=True)
+	overview	= models.TextField(blank=True, null=True)
+	description = models.TextField(blank=True, null=True)
 	timestamp 	= models.DateTimeField(auto_now_add=True)
 	updated 	= models.DateTimeField(auto_now=True)   
 	slug		= models.SlugField(null=True, blank=True)
@@ -85,6 +87,28 @@ class RestaurantLocations(models.Model):
 	@property	
 	def title(self):
 		return self.name 
+
+class RestaurantHighlights(models.Model):
+	CHOICES = (
+		("available","available"),
+		("not available","not available"),
+	)
+	AC_CHOICES = (
+		("accepted","accepted"),
+		("not accepted","not accepted"),
+	)
+	restaurant 		= models.ForeignKey(RestaurantLocations)
+	car_parking 	= models.CharField(max_length=128, null=True, blank=True,choices=CHOICES)
+	home_delivery	= models.CharField(max_length=128, null=True, blank=True,choices=CHOICES)
+	take_away		= models.CharField(max_length=128, null=True, blank=True,choices=CHOICES)
+	cards			= models.CharField(max_length=128, null=True, blank=True,choices=AC_CHOICES)
+	ac				= models.CharField(max_length=128, null=True, blank=True,choices=CHOICES)
+
+	class Meta:
+		verbose_name_plural = "05 Restaurant Details"
+
+	def __str__(self):
+		return '{} {}'.format(self.restaurant, self.ac)
 
 
 def rl_pre_save_receiver(sender, instance, *args, **kwargs):

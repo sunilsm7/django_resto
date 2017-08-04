@@ -6,6 +6,18 @@
 	<h1> {{ object.name }} <small>{{object.category}}</h1>
 	<p>{{ object.location }}</p>
 	<p>{{ object.timestamp}}, {{ object.updated|timesince }} ago </p>
+
+
+		<details>
+		  <summary><h4>Overview:</h4></summary>
+		  <p> {{object.overview}}</p>
+		</details>
+
+		<details>
+		  <summary><h4>Details:</h4></summary>
+		  <p> {{object.description}}</p>
+		</details>
+
 	<strong>Foods at {{ object.name }}</strong>
 		{% for obj in object.item_set.all %}
 			<li>{{ obj.name }}</li>

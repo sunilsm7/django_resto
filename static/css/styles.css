@@ -9,10 +9,20 @@
 }
 
 body {
-      font: 400 15px Lato, sans-serif;
+      font: 600 20px Lato, sans-serif;
       line-height: 1.8;
       color: #818181;
   }
+  
+p{
+    font-size: 18pt; 
+    color: black;
+    padding-left:5pt;
+    left:0; 
+    top:7pt;
+     font-family:National, Arial, sans-serif;position:relative; 
+     width:50%;
+}
   h2 {
       font-size: 24px;
       text-transform: uppercase;
@@ -47,7 +57,7 @@ body {
       height: 100px;
   }
   .container-fluid {
-      padding: 60px 50px;
+      padding: 40px 20px;
   }
   .bg-grey {
       background-color: #f6f6f6;

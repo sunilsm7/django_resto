@@ -50,6 +50,7 @@ class Item(models.Model):
 	name 			= models.CharField(max_length = 128) 
 	item_category 	= models.ForeignKey(ItemCategory)
 	course			= models.CharField(max_length=50,blank=True, null=True, choices=COURSE_CHOICES, default="All")
+	price			= models.CharField(max_length=10, blank=True, null=True)
 	contents 		= models.TextField(help_text = 'Separate each item by comma')
 	excludes 		= models.TextField(blank = True, null = True, help_text = 'Separate each item by comma')
 	public			= models.BooleanField(default = True)
