@@ -66,7 +66,7 @@ class RestaurantLocations(models.Model):
 	city 		= models.ForeignKey(City)
 	location 	= models.CharField(max_length=128, null=True, blank=True)
 	category 	= models.ForeignKey(RestaurantCuisine, null=True, blank=True)
-	overview	= models.TextField(blank=True, null=True)
+	#overview	= models.TextField(blank=True, null=True)
 	description = models.TextField(blank=True, null=True)
 	timestamp 	= models.DateTimeField(auto_now_add=True)
 	updated 	= models.DateTimeField(auto_now=True)   

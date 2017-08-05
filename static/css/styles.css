@@ -9,13 +9,13 @@
 }
 
 body {
-      font: 600 20px Lato, sans-serif;
+      font: 600 15px Lato, sans-serif;
       line-height: 1.8;
       color: #818181;
   }
   
 p{
-    font-size: 18pt; 
+    font-size: 12pt; 
     color: black;
     padding-left:5pt;
     left:0; 

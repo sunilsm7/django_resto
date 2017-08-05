@@ -5,7 +5,7 @@
 	
 	<div class="row">
 	<div class="container">
-	<h1> Food Items </h1>
+	<h1> Food Dishes </h1>
 	<form class="form-inline" method="GET" action=".">{% csrf_token %}
 		  <div class="form-group">
 		    <label for="menus"></label>
@@ -32,9 +32,10 @@
 		{% empty %}
 			
 		{% endfor %}
+		{% include 'snippets/pagination.html' %}
 	</div>
 
-	{% include 'snippets/pagination.html' %}
+	
 	</div>
 	</div>
 {% endblock%}

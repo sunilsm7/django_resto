@@ -18,12 +18,13 @@
 <form method="post" action="{% url 'login' %}">
 {% csrf_token %}
 {% include 'snippets/form-snippet.html' %}
-<input type="submit" value="login" class="btn btn-success" />
-<input type="hidden" name="next" value="{{ next }}" />
+<div class="form-group">
+	<input type="submit" value="login" class="btn btn-success" />
+	<input type="hidden" name="next" value="{{ next }}" />
+</div>
+<span><a href="{% url 'password_reset' %}">Lost password?</a></span>
 </form>
 
-{# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
 </div>
 
 {% endblock %}
