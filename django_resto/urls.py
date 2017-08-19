@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^password_reset_done/$',PasswordResetDoneView.as_view(), name='password_reset_done'),
     url(r'^password_reset_confirm/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     url(r'^password_reset_complete/$', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
     url(r'^profile-follow/$', ProfileFollowToggle.as_view(), name='follow'),
     url(r'^u/', include('profiles.urls', namespace='profiles')),
     url(r'^items/', include('menus.urls', namespace='menus')),

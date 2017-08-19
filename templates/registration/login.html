@@ -23,8 +23,12 @@
 	<input type="hidden" name="next" value="{{ next }}" />
 </div>
 <span><a href="{% url 'password_reset' %}">Lost password?</a></span>
-</form>
 
+</form>
+<p><strong>-- OR --</strong></p>
+<li><a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a></li>
+<li><a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a></li>
+<li><a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a></li>
 </div>
 
 {% endblock %}
