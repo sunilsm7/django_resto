@@ -56,10 +56,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'account',
     'restaurants',
     'menus',
     'profiles',
-    'crispy_forms',
+    'widget_tweaks',
     'social_django',
 ]
 

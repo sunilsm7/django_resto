@@ -1,24 +1,43 @@
-<div class="col-sm-6">
-{% for field in form.visible_fields %}
-<div id="div_{{ field.html_name }}"
-     class="form-group{% if field.errors %} has-error{% endif%}">
-    <label class="col-sm-4 control-label" for="{{ field.id_for_label }}">
-        {{ field.label }}
-    </label>
-    <div class="col-sm-8">
-        {{ field}}
-        <div class="text-muted">
-            <small>{{ field.help_text }}</small>
-        </div> <!-- form-group -->
-        <span class="help-block">
-            <ul class="list-group">
-             {% for error in field.errors %}
-                 <li>{{ error }}</li>
-             {% endfor %}
-      </ul>
-                </span> <!-- help-block -->
-    </div> <!-- col-sm-4 -->
+{% load widget_tweaks %}
 
-</div>
+{% for hidden_field in form.hidden_fields %}
+  {{ hidden_field }}
 {% endfor %}
-<div class="col-sm-8">
+
+{% if form.non_field_errors %}
+  <div class="alert alert-danger" role="alert">
+    {% for error in form.non_field_errors %}
+      {{ error }}
+     
+    {% endfor %}
+  </div>
+{% endif %}
+<div class="alert alert-success" id="error-message">
+      
+</div>
+{% for field in form.visible_fields %}
+  <div class="form-group">
+    {{ field.label_tag }}
+
+    {% if form.is_bound %}
+      {% if field.errors %}
+        {% render_field field class="form-control is-invalid" %}
+        {% for error in field.errors %}
+          <div class="invalid-feedback">
+            {{ error }}
+          </div>
+        {% endfor %}
+      {% else %}
+        {% render_field field class="form-control is-valid" %}
+      {% endif %}
+    {% else %}
+      {% render_field field class="form-control" %}
+    {% endif %}
+
+    {% if field.help_text %}
+      <small class="form-text text-muted">{{ field.help_text }}</small>
+    {% endif %}
+  </div>
+
+  
+{% endfor %}

@@ -5,7 +5,7 @@
 
 	<div class="row">
 	<div class="container">
-	<h1>Restaurants and Food Spots</h1>
+	 <h1>Restaurants and Food Spots</h1>
 		<form class="form-inline" method="GET" action=".">{% csrf_token %}
 		  <div class="form-group">
 		    <label for="restaurants"></label>
@@ -13,8 +13,8 @@
 		  </div>
 	
 		  <button type="submit" class="btn btn-success">Search</button>
-		</form>
-	
+		</form> 
+	<!-- 
 	<div class="list-group col-sm-8">
 		{% for obj in object_list %}
 			<span class="list-group-item list-group-item-action flex-column align-items-start rest-list">
@@ -29,7 +29,24 @@
 			{% empty%}
 		{% endfor %}
 		{% include 'snippets/pagination.html' %}
-	</div>
+	</div> -->
+	
+			{% for obj in object_list %}
+			<div class="card item-list">
+					<div class="card-block">
+						<h4 class="card-title"><a href="{% url 'restaurants:details' obj.slug %}" >{{ obj.name }}</a></h4>
+						<h6 class="card-subtitle mb-2 text-muted">{{ obj.location }},{{ obj.city.city_name }}</h6>
+						<p class="card-text">Cuisine:{{ obj.category }}
+								<small>Last Updated: {{ obj.updated }}</small>
+						</p>
+						<a href="#" class="card-link">Card link</a>
+						<a href="#" class="card-link">Another link</a>
+					</div>
+			</div>
+			{% empty%}
+		{% endfor %}
+
+		{% include 'snippets/pagination.html' %}
 	</div>
 	</div>
 {% endblock%}
