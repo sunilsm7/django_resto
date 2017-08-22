@@ -11,22 +11,14 @@ def validate_username(request):
         username = request.GET.get('username', None)
         email    = request.GET.get('email', None)
         pasword    = request.GET.get('pasword', None)
-        user = authenticate(username='username', password='pasword')
         
-        if user is not None:
-            valid_login = True
-        else:
-            valid_login = False
         data = {
             'username_is_taken':User.objects.filter(username__iexact=username).exists(),
             'email_is_taken':User.objects.filter(email__iexact=email).exists(),
-            'user_login' : valid_login,
         }
         if data['username_is_taken']:
             data['error_message'] = 'username not available.'
         elif data['email_is_taken']:
             data['error_message_email'] = 'email id not available.'
-        elif data['user_login']:
-            data['error_message_login'] = 'invalid password.'
         return JsonResponse(data)
 

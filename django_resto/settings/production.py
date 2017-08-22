@@ -53,7 +53,8 @@ INSTALLED_APPS = [
     'menus',
     'profiles',
     'crispy_forms',
-    'social_django',
+    'widget_tweaks',
+    'social_django'
 ]
 
 MIDDLEWARE = [

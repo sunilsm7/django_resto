@@ -13,6 +13,8 @@ $(document).ready(function(){
 
 });
 $(document).ready(function () {
+    isCollapsed: boolean = true;
+
     $("#error-message").hide();
     // CSRF code
                 function getCookie(name) {
@@ -136,32 +138,6 @@ function ValidateEmail(email) {
 
   });
 
-  $("#id_password").change(function (e) {
-    e.preventDefault();
-    var password = $("#id_password").val();
-     //var UrlEndpoint = "{% url 'account:validate_username' %}";
-     var UrlEndpoint ="/account/validate_username";
-     $.ajax({
-         url:UrlEndpoint,
-         data: {'password':password },
-         dataType:'json',
-         content_type:'application/json',
-         success:function(data){
-                console.log(data.user_login);
-                //  if(data.valid_login){
-                     
-                //      //$("#error-message").show().html("<label>"+data.error_message_email+"</label>").fadeOut(3000);
-                //  }
-                //  else{ 
-                     
-                //  }              
-         },
-         error:function(xhr, textStatus, errorThrown){
-            console.log(xhr);
-         },
-     });
-
-  });
   
 });
 

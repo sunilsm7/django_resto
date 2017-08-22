@@ -119,23 +119,29 @@
 			<div class="col-md-5">
 			  <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
 			</div>
-		  </div>
-<div class="container">
-
-{% if locations %}
-	{% for rest in locations %}
-		<div class="row">
-			<div class="col-sm-8"> 
-				<div class="thumbnail">
-					<h4><strong><a href="{% url 'restaurants:details' rest.slug %}">{{ rest.title }}</a></strong> </h4>
-					<p><a href="{{ request.path}}?q={{ rest.location}}">{{ rest.location}}</a> | <a href="{{request.path}}?q={{ rest.category}}">{{ rest.category}}</a></p>
-				</div>
+			</div>
+			<div class="row">
+					<div class="col-lg-6">
+					{% if locations %}
+					{% for rest in locations %}
+						<div class="row">
+							<div class="col-sm-8"> 
+								<div class="thumbnail">
+									<h4><strong><a href="{% url 'restaurants:details' rest.slug %}">{{ rest.title }}</a></strong> </h4>
+									<p><a href="{{ request.path}}?q={{ rest.location}}">{{ rest.location}}</a> | <a href="{{request.path}}?q={{ rest.category}}">{{ rest.category}}</a></p>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+					{% include 'snippets/pagination.html' %}
+				{% else %}
+				{% endif %}
+				
 			</div>
 		</div>
-	{% endfor %}
-	{% include 'snippets/pagination.html' %}
-{% else %}
-		
-{% endif %}
-</div>
+		</div>
+
+
+
+
 {% endblock%}
