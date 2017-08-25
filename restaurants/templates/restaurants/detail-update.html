@@ -2,20 +2,19 @@
 
 {% block title%} <title>{{form.instance.title}} | Restaurants </title> {% endblock %}
 {% block content%}
-
+<div class="row">
+<div class="container">
 	<h1> {{ form.instance.name }} <small>{{form.instance.category}}</h1>
 	<p>{{ form.instance.location }}</p>
 	<p>{{ form.instance.timestamp}}, {{ form.instance.updated|timesince}} ago </p>
-
 	<hr/>
-	<div class="row">
 	<h3>Make Changes </h3>
-		<form method="post" >{% csrf_token %}
+		<form method="post" class="col-sm-7">{% csrf_token %}
 			{% include 'snippets/form-snippet.html' %}
 			<div class="form-group">
 				<button type="submit" class="btn btn-success">Save</button>
 			</div>
 		</form>
 	</div>
-	
+</div>	
 {% endblock%}

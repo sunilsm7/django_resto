@@ -17,8 +17,8 @@ def validate_username(request):
             'email_is_taken':User.objects.filter(email__iexact=email).exists(),
         }
         if data['username_is_taken']:
-            data['error_message'] = 'username not available.'
+            data['error_message'] = 'A user with that username already exists.'
         elif data['email_is_taken']:
-            data['error_message_email'] = 'email id not available.'
+            data['error_message_email'] = 'Can not use this email. Its already registered.'
         return JsonResponse(data)
 

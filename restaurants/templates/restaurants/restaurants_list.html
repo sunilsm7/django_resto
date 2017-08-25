@@ -2,8 +2,6 @@
 
 {% block title%} <title>Restaurants List </title> {% endblock %}
 {% block content%}
-
-	<div class="row">
 	<div class="container">
 	<h1>My Restaurants <small><a href="{% url 'restaurants:create' %}">Add</a></small></h1>
 	<div class="list-group col-sm-8">
@@ -22,7 +20,6 @@
 			
 		{% endfor %}
 		{% include 'snippets/pagination.html' %}
-	</div>
 	</div>
 	</div>
 {% endblock%}

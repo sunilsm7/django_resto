@@ -12,9 +12,9 @@
     {% endfor %}
   </div>
 {% endif %}
-<div class="alert alert-success" id="error-message">
+<!-- <div class="alert alert-success" id="error-message">
       
-</div>
+</div> -->
 {% for field in form.visible_fields %}
   <div class="form-group">
     {{ field.label_tag }}
@@ -33,7 +33,8 @@
     {% else %}
       {% render_field field class="form-control" %}
     {% endif %}
-
+    <div class="invalid-feedback">
+    </div>
     {% if field.help_text %}
       <small class="form-text text-muted">{{ field.help_text }}</small>
     {% endif %}

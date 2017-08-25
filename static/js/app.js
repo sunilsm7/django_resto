@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+    
    $("input").focus(function(){
         $(this).css("background-color", "#cccccc");
     });
@@ -15,7 +16,7 @@ $(document).ready(function(){
 $(document).ready(function () {
     isCollapsed: boolean = true;
 
-    $("#error-message").hide();
+    
     // CSRF code
                 function getCookie(name) {
                     var cookieValue = null;
@@ -63,22 +64,27 @@ $("#id_username").change(function (e) {
         content_type:'application/json',
         success:function(data){
             if(form==='loginForm'){
+                
                 if(!data.username_is_taken){
-                    $("#error-message").show().html("<label>please enter correct username</label>").fadeOut(3000);
+                    $("#id_username").closest("div").find("div").show().html("<label>please enter correct username</label>");
                 }
                 else{
-                    $("#error-message").hide();
+                    $("#id_username").closest("div").find("div").hide();
                 }
                 
             }
             else{
-                if(data.username_is_taken){
+                if(data.username_is_taken){  
+                   
+                    $("#id_username").closest("div").find("div").show().html("<label>"+data.error_message+"</label>");
+                }
+                else if($("#id_username").val()==''){
                     
-                    $("#error-message").show().html("<label>"+data.error_message+"</label>").fadeOut(3000);
+                    $("#id_username").closest("div").find("div").show().html("<label>required field</label>");
                 }
                 else{
                     
-                    $("#error-message").show().html("<label>username available</label>").fadeOut(3000);
+                    $("#id_username").closest("div").find("div").show().html("<label>username available</label>");
                 }
                 
             }
@@ -108,14 +114,14 @@ function ValidateEmail(email) {
         success:function(data){
                 if(data.email_is_taken){
                     
-                    $("#error-message").show().html("<label>"+data.error_message_email+"</label>").fadeOut(3000);
+                    $("#id_email").closest("div").find("div").show().html("<label>"+data.error_message_email+"</label>");
                 }
                 else{
                     if (!ValidateEmail(email)) {
-                        $("#error-message").show().html("<label>Invalid email address.</label>").fadeOut(3000);
+                        $("#id_email").closest("div").find("div").show().html("<label>Invalid email address.</label>");
                     }
                     else{
-                        $("#error-message").show().html("<label>email id available</label>").fadeOut(3000);
+                        $("#id_email").closest("div").find("div").show().html("<label>email id available</label>");
                     }
                     
                 }              
@@ -133,7 +139,10 @@ function ValidateEmail(email) {
     var password2 = $("#id_password2").val();
     if(password1!==password2)
     {
-        $("#error-message").show().html("<label>password doesn't matches</label>").fadeOut(3000);
+        $("#id_password2").closest("div").find("div").show().html("<label>password doesn't matches</label>");
+    }
+    else{
+        $("#id_password2").closest("div").find("div").hide();
     }
 
   });

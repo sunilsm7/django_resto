@@ -6,7 +6,7 @@
 	<div class="row">
 	<div class="container">
 	<h1> Menu Items <small><a href="{% url 'menus:create' %}">Add</small></h1>
-	<div class="list-group col-sm-8">
+	<div class="list-group col-sm-10">
 		{% for obj in object_list %}
 			<div class="list-group-item item-list"><a href="{{obj.get_absolute_url}}">{{ obj.name }}</a> 
 			</br>

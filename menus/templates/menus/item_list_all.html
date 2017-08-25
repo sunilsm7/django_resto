@@ -6,14 +6,14 @@
 	<div class="row">
 	<div class="container">
 	<h1> Food Dishes </h1>
-	<form class="form-inline" method="GET" action=".">{% csrf_token %}
+	<form class="form-inline my-2 my-lg-0" method="GET" action=".">{% csrf_token %}
 		  <div class="form-group">
 		    <label for="menus"></label>
-		    <input type="text" class="form-control" name="q" placeholder="Search food dishes...">
+		    <input type="text" class="form-control mr-sm-2" name="q" placeholder="Search food dishes...">
 		  </div>
-		  <button type="submit" class="btn btn-success">Search</button>
+		  <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
 	</form>
-	<div class="list-group col-sm-8">
+	<!-- <div class="list-group col-sm-8">
 		{% for obj in object_list %}
 			<div class="list-group-item item-list">
 				<h3><a href="{% url 'menus:details' obj.pk %}">
@@ -33,8 +33,27 @@
 			
 		{% endfor %}
 		{% include 'snippets/pagination.html' %}
+	</div> -->
+	{% for obj in object_list %}
+	<div class="card item-list">
+			<div class="card-block">
+				<h4 class="card-title"><a href="{% url 'menus:details' obj.pk %}" >{{ obj.name }}</a></h4>
+				<h6 class="card-subtitle mb-2 text-muted">{{obj.item_category}}</h6>
+				<p class="card-text">Restaurant:<a href="{% url 'restaurants:details' obj.restaurant.slug %}">{{obj.restaurant.name}}</a>
+						
+				</p>
+				<p>
+					<li>Course:{{obj.course}}</li>
+					<li>Price:Rs.{{ obj.price }}</li>
+				</p>
+				<a href="#" class="card-link">Card link</a>
+				<a href="#" class="card-link">Another link</a>
+			</div>
 	</div>
+	{% empty%}
+{% endfor %}
 
+{% include 'snippets/pagination.html' %}
 	
 	</div>
 	</div>

@@ -2,11 +2,14 @@
 
 {% block title%} <title>{{user.username}} </title> {% endblock %}
 {% block content%}
+<div class="container">
 	<h1>{{ user.username }}</h1>
+	<a class="" href="{% url 'restaurants:list' %}">My Food Spot</a>
+	<a class="" href="{% url 'menus:list' %}">My Dishes</a>
 	<p>{% include 'profiles/snippet/follow_form.html' with username=user.username is_following=is_following %} </p>
-	<form class="form" method="GET" action=".">
-		<div class="form-group col-sm-2">
-			<input type="text" name="q" placeholder="Search.." value="{{ request.GET.q }}" class="form-control">
+	<form class="form-inline my-2 my-lg-0" method="GET" action=".">
+		<div class="form-group">
+			<input type="text" name="q" placeholder="Search.." value="{{ request.GET.q }}" class="form-control mr-sm-2">
 			</div>
 			<button class="btn btn-success" type="submit">Search</button>
 	</form>
@@ -41,5 +44,5 @@
 	{% else %}
 		<p class="lead">No Items Found</p>
 	{% endif %}
-
+</div>
 {% endblock%}

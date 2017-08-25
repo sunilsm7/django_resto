@@ -5,7 +5,9 @@
 body {
   padding-top: 3rem;
   padding-bottom: 3rem;
-  color: #5a5a5a;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: #555;
+  font-size: 15px;
 }
 
 
@@ -88,4 +90,10 @@ body {
   .featurette-heading {
     margin-top: 7rem;
   }
+}
+.container{
+  margin-top: 50px;
+}
+a:active, a:hover{
+  text-decoration: none;
 }
