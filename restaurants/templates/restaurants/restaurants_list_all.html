@@ -14,23 +14,6 @@
 	
 		  <button type="submit" class="btn btn-success">Search</button>
 		</form> 
-	<!-- 
-	<div class="list-group col-sm-8">
-		{% for obj in object_list %}
-			<span class="list-group-item list-group-item-action flex-column align-items-start rest-list">
-			    <div class="d-flex w-100 justify-content-between">
-			      <h3 class="mb-1"><a href="{% url 'restaurants:details' obj.slug %}" >{{ obj.name }}</a>  <small>{{ obj.location }},{{ obj.city.city_name }}</small></h3>
-			     
-			    </div>
-			    <p class="mb-1">Cuisine:{{ obj.category }}</p>
-			    <small>Last Updated: {{ obj.updated }}</small>
- 			 </span>
- 			 
-			{% empty%}
-		{% endfor %}
-		{% include 'snippets/pagination.html' %}
-	</div> -->
-	
 			{% for obj in object_list %}
 			<div class="card item-list">
 					<div class="card-block">

@@ -13,27 +13,7 @@
 		  </div>
 		  <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Search</button>
 	</form>
-	<!-- <div class="list-group col-sm-8">
-		{% for obj in object_list %}
-			<div class="list-group-item item-list">
-				<h3><a href="{% url 'menus:details' obj.pk %}">
-				{{ obj.name }}</a> <small><a href="{{ request.path}}?q={{ obj.item_category}}">{{obj.item_category}}</a></small></h3>
-				<p>	
-					<li>
-						<strong>
-							<a href="{% url 'restaurants:details' obj.restaurant.slug %}">{{obj.restaurant.name}},</a>
-						</strong>
-						<small><a href="{{ request.path}}?q={{ obj.restaurant.location }}">{{obj.restaurant.location}}</a></small>
-					</li>
-					<li><strong>{{obj.course}}</strong></strong></li>
-					<li><strong>Price Rs.{{ obj.price }}</strong></li>
-				</p>
-			</div>
-		{% empty %}
-			
-		{% endfor %}
-		{% include 'snippets/pagination.html' %}
-	</div> -->
+
 	{% for obj in object_list %}
 	<div class="card item-list">
 			<div class="card-block">

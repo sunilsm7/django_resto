@@ -2,8 +2,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user_model
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import CreateView, DetailView, View
-
+from django.views.generic import CreateView, ListView, DetailView, View
+from django.core.paginator import Paginator
+from django.db.models import Q
 from .forms import RegisterForm
 
 from menus.models import Item
@@ -72,3 +73,17 @@ class ProfileDetailView(DetailView):
         if items_exists and qs.exists():
             context['locations'] = qs
         return context
+
+class SearchView(ListView):
+    paginate_by = 10
+
+    def get(self,request,*args,**kwargs):
+        context = {}
+        if 'q' in self.request.GET:
+            query = self.request.GET.get('q')
+            qs = RestaurantLocations.objects.search(query)
+            if qs.exists():
+                context['locations'] = qs
+                return render(request,'search_results.html',context)
+            else:
+                return render(request,'search_results.html',context)

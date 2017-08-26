@@ -28,12 +28,12 @@ class HomeView(ListView):
             return render(request, 'menus/home-feed.html', {'object_list': qs})
         else:
             context = {}
-            if 'q' in self.request.GET:
-                query = self.request.GET.get('q')
-                qs = RestaurantLocations.objects.search(query)
-                if qs.exists():
-                    context['locations'] = qs
-                    return render(request, 'search_results.html', context)
+            # if 'q' in self.request.GET:
+            #     query = self.request.GET.get('q')
+            #     qs = RestaurantLocations.objects.search(query)
+            #     if qs.exists():
+            #         context['locations'] = qs
+            #         return render(request, 'search_results.html', context)
             return render(request, 'home.html', context)
 
 

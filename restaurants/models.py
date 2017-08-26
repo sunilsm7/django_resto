@@ -20,7 +20,7 @@ class RestaurantLocationsQuerySet(models.query.QuerySet):
 				Q(category__cuisine__icontains=query)|
 				Q(category__cuisine__iexact=query)|
 				Q(item__name__icontains=query)|
-				Q(item__contents__icontains=query)
+				Q(item__item_category__category__istartswith=query)
 				).distinct()
 
 		return self

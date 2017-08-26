@@ -3,30 +3,38 @@
 {% block title%} <title>Item Detail </title> {% endblock %}
 {% block content%}
 <div class="container">
-	<h2> {{ object.name }} Detail</h2>
+	<h2> {{ object.name }}</h2>
 	<p>
-	<strong>Location : {{ object.restaurant }} Detail</strong>
-	{{object.item_category}}
+	<strong>
+		<ul>
+		<li>Location : <a href="{% url 'restaurants:details' object.restaurant.slug %}">{{ object.restaurant }}</a></li>
+		<li>Category: {{object.item_category}}</li>
+		<li>Course: {{object.course}}</li>
+		<li>Price: Rs.{{object.price}}</li>
+		<li>Last Updated: {{ object.updated }}</li>
+		</ul>
+	</strong>
 	</p>
 	</br>
 	{% if object.contents %}
-					Contents
-					<ul>
-						{% for item in object.get_contents %}
-							<li> {{ item }} </li>
-						{% endfor %}
+		<strong>Contents</strong>
+			<ul>
+				{% for item in object.get_contents %}
+					<li> {{ item }} </li>
+				{% endfor %}
 
-					</ul>
-				{% endif %}
+			</ul>
+		{% endif %}
 
-				{% if object.excludes %}
-					Excludes
-					<ul>
-						{% for item in object.get_excludes %}
-							<li> {{ item }} </li>
-						{% endfor %}
+		{% if object.excludes %}
+			Excludes
+			<ul>
+				{% for item in object.get_excludes %}
+					<li> {{ item }} </li>
+				{% endfor %}
 
-					</ul>
-				{% endif %}
+			</ul>
+	{% endif %}
+
 </div>	
 {% endblock%}

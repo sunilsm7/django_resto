@@ -4,8 +4,8 @@
 {% block content%}
 <div class="container">
 	<h1> {{ object.name }} <small>{{object.category}}</h1>
-	<p>{{ object.location }}</p>
-	<p>{{ object.timestamp}}, {{ object.updated|timesince }} ago </p>
+	<p><strong>{{ object.location }}</strong></p>
+	<p>Last Updated info:{{ object.timestamp}}, {{ object.updated|timesince }} ago </p>
 
 
 		<details>
@@ -15,23 +15,34 @@
 
 	<strong>Foods at {{ object.name }}</strong>
 		{% for obj in object.item_set.all %}
-			<li>{{ obj.name }}</li>
+			<li><a href="{% url 'menus:details' obj.pk %}" >{{ obj.name }}</a></li>
 		{% empty %}
 			<small>No food dishes available yet!</small>
 		{% endfor %}
 		<ul class="list-group">
+			
 			<li class="list-group-item justify-content-between">
-			  Cras justo odio
-			  <span class="badge badge-default badge-pill">14</span>
+					Car Parking
+			  <span class="badge badge-default badge-pill">{{object.restauranthighlights_set.get.car_parking}}</span>
 			</li>
 			<li class="list-group-item justify-content-between">
-			  Dapibus ac facilisis in
-			  <span class="badge badge-default badge-pill">2</span>
+					Home delivery
+			  <span class="badge badge-default badge-pill">{{object.restauranthighlights_set.get.home_delivery}}</span>
 			</li>
 			<li class="list-group-item justify-content-between">
-			  Morbi leo risus
-			  <span class="badge badge-default badge-pill">1</span>
+					Take away
+			  <span class="badge badge-default badge-pill">{{object.restauranthighlights_set.get.take_away}}</span>
+			</li>
+			<li class="list-group-item justify-content-between">
+					Cards
+			  <span class="badge badge-default badge-pill">{{object.restauranthighlights_set.get.cards}}</span>
+			</li>
+			<li class="list-group-item justify-content-between">
+					AC
+			  <span class="badge badge-default badge-pill">{{object.restauranthighlights_set.get.ac}}</span>
 			</li>
 		</ul>
+		
+
 </div>
 {% endblock%}

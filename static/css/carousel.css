@@ -94,6 +94,14 @@ body {
 .container{
   margin-top: 50px;
 }
-a:active, a:hover{
+card,a:active, a:hover{
   text-decoration: none;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: #680DB5;
+}
+
+card,a{
+  text-decoration: none;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: #070000;
 }
