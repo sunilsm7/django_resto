@@ -1,7 +1,10 @@
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
+
 from django.db.models import Q
+from comments.models import Comment
 from restaurants.models import RestaurantLocations
 # Create your models here.
 
@@ -65,6 +68,10 @@ class Item(models.Model):
 	class Meta:
 		ordering = ['-updated', '-timestamp']
 		verbose_name_plural = "02 Menu Item"
+		permissions = (
+				('can_view', 'Can View'),
+				('can_modify', 'Can Modify'),
+			)
 
 	def get_absolute_url(self):
 		return reverse('menus:detail', kwargs= {'pk': self.pk})
@@ -74,4 +81,16 @@ class Item(models.Model):
 
 	def get_excludes(self):
 		return self.excludes.split(",")
+		
+	@property
+	def get_content_type(self):
+		instance = self
+		content_type = ContentType.objects.get_for_model(instance.__class__)
+		return content_type 
+	
+	@property
+	def comments(self):
+		instance = self
+		qs = Comment.objects.filter_by_instance(instance)
+		return qs
 

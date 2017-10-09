@@ -37,3 +37,11 @@ class RestaurantLocationCreateForm(forms.ModelForm):
 	# 	if ".edu" in email:
 	# 		raise forms.ValidationError("We do not accept edu emails")
 	# 	return email
+
+
+class RestaurantSearchForm(forms.Form):
+  #CHOICES = (('', 'Reservation_Status',), ('Confirmed', 'Confirmed',), ('Waiting', 'Waiting',))
+	name 		= forms.CharField(required=False)
+	city		= forms.CharField(required=False)
+	location 	= forms.CharField(required=False)
+	category 	= forms.CharField(required=False)

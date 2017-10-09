@@ -20,11 +20,17 @@
 {% csrf_token %}
 {% include 'snippets/form-snippet.html' %}
 <div class="form-group">
-	<input type="submit" value="login" class="btn btn-success" />
+	<input type="submit" value="Login" class="btn btn-success" />
 	<input type="hidden" name="next" value="{{ next }}" />
+	<div class="text-muted text-center">
+          New to foodies-spot? <a href="{% url 'register' %}">Sign up</a>
+	</div>
+	<div class="text-center py-2">
+        <small>
+          <a href="{% url 'password_reset' %}" class="text-muted">Forgot your password?</a>
+        </small>
+ 	</div>
 </div>
-<span><a href="{% url 'password_reset' %}">Lost password?</a></span>
-<span><a href="{% url 'register' %}">Register here</a></span>
 </form>
 <p><strong>-- OR --</strong></p>
 

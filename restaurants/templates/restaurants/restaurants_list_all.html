@@ -6,13 +6,13 @@
 	<div class="row">
 	<div class="container">
 	 <h1>Restaurants and Food Spots</h1>
-		<form class="form-inline" method="GET" action=".">{% csrf_token %}
+		<form class="form-inline my-2 my-lg-0" method="GET" action=".">{% csrf_token %}
 		  <div class="form-group">
 		    <label for="restaurants"></label>
-		    <input type="text" class="form-control" name="q" placeholder="Search Restaurants">
+		    <input type="text" class="form-control mr-sm-2" name="q" placeholder="Search Restaurants">
 		  </div>
-	
-		  <button type="submit" class="btn btn-success">Search</button>
+			{{ form }}
+		  <button type="submit" class="btn btn-success">Filter</button>
 		</form> 
 			{% for obj in object_list %}
 			<div class="card item-list">

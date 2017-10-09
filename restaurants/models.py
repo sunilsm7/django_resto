@@ -1,8 +1,11 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.db.models.signals import pre_save, post_save
 from django.db.models import Q
+
+from comments.models import Comment
 from .utils import unique_slug_generator
 from .validators import validate_category
 # Create your models here.
@@ -24,6 +27,8 @@ class RestaurantLocationsQuerySet(models.query.QuerySet):
 				).distinct()
 
 		return self
+		
+
 
 class RestaurantLocationsManager(models.Manager):
 	def get_queryset(self):
@@ -77,6 +82,10 @@ class RestaurantLocations(models.Model):
 	class Meta:
 		ordering = ['-updated']
 		verbose_name_plural = "04 Restaurant Location"
+		permissions = (
+				('can_view', 'Can View'),
+				('can_modify', 'Can Modify'),
+			)
 
 	def __str__(self):
 		return '{} {}'.format(self.name, self.location)
@@ -86,7 +95,19 @@ class RestaurantLocations(models.Model):
 		
 	@property	
 	def title(self):
-		return self.name 
+		return self.name
+
+	@property
+	def get_content_type(self):
+		instance = self
+		content_type = ContentType.objects.get_for_model(instance.__class__)
+		return content_type 
+	
+	@property
+	def comments(self):
+		instance = self
+		qs = Comment.objects.filter_by_instance(instance)
+		return qs
 
 class RestaurantHighlights(models.Model):
 	CHOICES = (
@@ -113,16 +134,8 @@ class RestaurantHighlights(models.Model):
 
 def rl_pre_save_receiver(sender, instance, *args, **kwargs):
 
-	#instance.category = instance.category.capitalize()
 	if not instance.slug:
 		instance.slug = unique_slug_generator(instance)
 
-# def rl_post_save_receiver(sender, instance, created, *args, **kwargs):
-# 	print('saved...')
-# 	print(instance.timestamp)
-# 	if not instance.slug:
-# 		instance.slug = unique_slug_generator(instance)
-	
 pre_save.connect(rl_pre_save_receiver, sender=RestaurantLocations)
 
-#post_save.connect(rl_post_save_receiver, sender=RestaurantLocations)	

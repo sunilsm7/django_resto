@@ -11,13 +11,39 @@
     {% endblock %}
 </head>
 <body> 
-{% include 'snippets/nav.html' %}
-        {% block content%}
-
-        {% endblock%}
-        {% include 'snippets/footer.html' %}
+{% block body %}
+    {% include 'snippets/nav.html' %}
+        <div class="container">
+          <ol class="breadcrumb my-4">
+            {% block breadcrumb %}
+            {% endblock %}
+          </ol>
+          {% block content %}
+          {% endblock %}
+        </div>
+    {% include 'snippets/footer.html' %}
+    
     {% block javascript %}
         {% include 'snippets/js.html'%}
     {% endblock %}
+
+
+{% endblock body %}
+<script type="text/javascript">
+$(document).ready(function(){
+    $(".comment-reply").hide();
+    $(".comment-reply-btn").click(function(event){
+        event.preventDefault();
+        $(this).parent().next(".comment-reply").fadeToggle();
+    })
+
+
+    // preview-title
+    // preview-content
+
+});
+
+</script>
+
 </body>
 </html>

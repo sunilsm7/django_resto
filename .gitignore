@@ -2,6 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
+
 django_resto/settings/local.py
 django_resto/settings/local2.py
 */local.py

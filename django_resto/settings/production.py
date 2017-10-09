@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'restaurants',
     'menus',
     'profiles',
+    'comments',
     'widget_tweaks',
     'social_django'
 ]

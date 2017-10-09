@@ -2,17 +2,20 @@
 
 {% block content %}
 
-<div class="container">
-<div class="col-sm-4">
-<h2>Register here</h2>
+<div class="container ">
+	<div class="col-sm-6 border-dark">
+		<h2>Register here</h2>
 
-<form method="post" action="{% url 'register' %}" id="registerForm">{% csrf_token %}
-{% include 'snippets/form-snippet.html' %}
-<input class="btn btn-outline-info my-2 my-sm-0" type="submit" value="Register" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
-<p>Already registered ? <a href="{% url 'login' %}">Login here</a>
-</div>
+		<form method="post" action="{% url 'register' %}" id="registerForm">{% csrf_token %}
+			{% include 'snippets/form-snippet.html' %}
+			<input class="btn btn-success my-2 my-sm-0" type="submit" value="Register" />
+			<input type="hidden" name="next" value="{{ next }}" />
+		</form>
+
+		<div class="form-group text-muted text-center">
+		    Already have an account? <a href="{% url 'login' %}">Log in</a>
+		</div>
+	</div>
 </div>
 
 
